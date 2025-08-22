@@ -10,77 +10,77 @@ import Filter from '../../components/Filter';
 
 const UserDashboard = () => {
 
-  const [stores, setStores] = useState([]);
+  const [stores, setStores] = useState([]);
 
-  const [filter, setFilter] = useState('');
-
-
-
-  const fetchStores = async () => {
-
-    try {
-
-      const storesRes = await userService.getStores({ name: filter, address: filter });
-
-      console.log('Fetched stores:', storesRes.data.map(s => s.owner.name));
-
-      setStores(storesRes.data);
-
-    } catch (error) {
-
-      console.error('Failed to fetch stores', error);
-
-    }
-
-  };
+  const [filter, setFilter] = useState('');
 
 
 
-  useEffect(() => {
+  const fetchStores = async () => {
 
-    fetchStores();
+    try {
 
-  }, [filter]);
+      const storesRes = await userService.getStores({ name: filter, address: filter });
+
+      console.log('Fetched stores:', storesRes.data.map(s => s.owner.name));
+
+      setStores(storesRes.data);
+
+    } catch (error) {
+
+      console.error('Failed to fetch stores', error);
+
+    }
+
+  };
 
 
 
-  const handleRatingSubmitted = () => {
+  useEffect(() => {
 
-    fetchStores();
+    fetchStores();
 
-  };
+  }, [filter]);
 
 
 
-  return (
+  const handleRatingSubmitted = () => {
 
-    <div className="container mx-auto p-4">
+    fetchStores();
 
-      <h1 className="text-2xl font-bold mb-4">Stores</h1>
+  };
 
-      <Filter onFilter={setFilter} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        {stores.map((store) => (
+  return (
 
-          <StoreCard
+    <div className="container mx-auto p-4">
 
-            key={store._id}
+      <h1 className="text-2xl font-bold mb-4">Stores</h1>
 
-            store={store}
+      <Filter onFilter={setFilter} />
 
-            onRatingSubmitted={handleRatingSubmitted}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-          />
+        {stores.map((store) => (
 
-        ))}
+          <StoreCard
 
-      </div>
+            key={store._id}
 
-    </div>
+            store={store}
 
-  );
+            onRatingSubmitted={handleRatingSubmitted}
+
+          />
+
+        ))}
+
+      </div>
+
+    </div>
+
+  );
 
 };
 
