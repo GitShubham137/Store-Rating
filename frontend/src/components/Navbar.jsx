@@ -35,6 +35,12 @@ const Navbar = () => {
                   Store Dashboard
                 </Link>
               )}
+
+              {/* --- ADD THIS LINK --- */}
+              <Link to="/profile" className="text-gray-300 hover:text-white">
+                Update Password
+              </Link>
+              
               <button
                 onClick={handleLogout}
                 className="text-gray-300 hover:text-white"

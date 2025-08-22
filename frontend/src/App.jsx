@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import UserDashboard from './pages/user/UserDashboard';
 import StoreOwnerDashboard from './pages/storeowner/StoreOwnerDashboard';
+import ProfilePage from './pages/user/ProfilePage'; // <-- 1. IMPORT THE NEW PAGE
 import NotFound from './pages/NotFound';
 import Unauthorized from './pages/Unauthorized';
 import PrivateRoute from './components/PrivateRoute';
@@ -20,6 +21,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
+
+        {/* 2. ADD A NEW PRIVATE ROUTE FOR THE PROFILE PAGE */}
+        <Route element={<PrivateRoute roles={['System Administrator', 'Normal User', 'Store Owner']} />}>
+          <Route path="/profile" element={<ProfilePage />} />
+        </Route>
 
         <Route element={<PrivateRoute roles={['System Administrator']} />}>
           <Route path="/admin" element={<AdminDashboard />} />
